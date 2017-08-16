@@ -12,6 +12,7 @@
         <module>poseidon-base-mapper</module>
         <module>poseidon-common</module>
         <module>poseidon-logger</module>
+        <module>poseidon-base-service</module>
     </modules>
 
     <properties>
