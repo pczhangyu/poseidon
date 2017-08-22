@@ -19,6 +19,9 @@
         <module>poseidon-web</module>
         <module>poseidon-api-service</module>
         <module>poseidon-api-mapper</module>
+        <module>poseidon-search</module>
+        <module>poseidon-search-service</module>
+        <module>poseidon-search-mapper</module>
     </modules>
 
     <properties>
