@@ -62,7 +62,7 @@
     </dependencies>
 
     <build>
-        <finalName>frigga-base-mapper</finalName>
+        <finalName>poseidon-base-mapper</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
