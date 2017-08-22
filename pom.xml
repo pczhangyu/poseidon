@@ -13,6 +13,9 @@
         <module>poseidon-common</module>
         <module>poseidon-logger</module>
         <module>poseidon-base-service</module>
+        <module>poseidon-web-mapper</module>
+        <module>poseidon-web-service</module>
+        <module>poseidon-web</module>
     </modules>
 
     <properties>
