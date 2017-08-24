@@ -1,4 +1,4 @@
-package com.JUtils.QRCode;
+package com.poseidon.common.QRCode;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -15,6 +15,7 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import com.poseidon.common.QRCode.MatrixToLogoImageConfig;
 
 public class MatrixToImageWriterEx {
 

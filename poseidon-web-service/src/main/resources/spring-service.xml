@@ -15,7 +15,7 @@
     <context:annotation-config/>
 
     <!-- 扫描service -->
-    <context:component-scan base-package="com.frigga.web.service">
+    <context:component-scan base-package="com.poseidon.web.service">
         <context:exclude-filter type="annotation"
                                 expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
@@ -34,7 +34,7 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
         <!--可用,或者;分割多个扫描的包-->
-        <property name="basePackage" value="com.frigga.mapper"/>
+        <property name="basePackage" value="com.poseidon.mapper"/>
     </bean>
 
     <bean id="transactionManager"
@@ -70,11 +70,12 @@
     <!-- 配置方式开启事务 -->
     <aop:config proxy-target-class="true" expose-proxy="true">
         <aop:pointcut id="serviceOperation"
-                      expression="execution(* com.frigga.web.service.*.*(..))"/>
+                      expression="execution(* com.poseidon.web.service.*.*(..))"/>
         <aop:advisor pointcut-ref="serviceOperation" advice-ref="txAdvice"/>
     </aop:config>
 
-    <context:component-scan base-package="com.frigga.provider"/>
+    <!--<context:component-scan base-package="com.frigga.provider"/>dubbo提供者配置-->
+
     <!--<import resource="provider.xml"/>-->
     <import resource="spring-ehcache.xml" />
     <!--<import resource="spring-redis.xml" />-->

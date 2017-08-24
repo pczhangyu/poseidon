@@ -6,9 +6,9 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>poseidon-web</artifactId>
+    <artifactId>poseidon-admin</artifactId>
     <packaging>war</packaging>
-    <name>poseidon-web Maven Webapp</name>
+    <name>poseidon-admin Maven Webapp</name>
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
@@ -19,6 +19,6 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>poseidon-web</finalName>
+        <finalName>poseidon-admin</finalName>
     </build>
 </project>
