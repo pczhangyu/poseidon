@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+		 updateCheck="true">
+	<!-- EhCache在每次启动的时候都要连接到 ehcache 网站上去检查新版本 使用如上的 updateCheck="false" 来禁止这个检查新版本 -->
+	
+	<!--  
+        name:cache唯一标识   
+        eternal：缓存是否永久有效   
+        maxElementsInMemory：内存中最大缓存对象数  
+        overflowToDisk(true,false)：缓存对象达到最大数后，将缓存写到硬盘中  
+        diskPersistent：硬盘持久化  
+        timeToIdleSeconds：缓存清除时间   
+        timeToLiveSeconds：缓存存活时间
+        diskExpiryThreadIntervalSeconds：磁盘缓存的清理线程运行间隔
+        memoryStoreEvictionPolicy：缓存清空策略
+        1.FIFO：first in first out 先讲先出  
+        2.LFU： Less Frequently Used 一直以来最少被使用的  
+        3.LRU：Least Recently Used  最近最少使用的   
+    -->
+	
+	<diskStore path="java.io.tmpdir" />
+	
+	<defaultCache 
+		maxElementsInMemory="10000" 
+		eternal="false" 
+		timeToIdleSeconds="120"
+		timeToLiveSeconds="120" 
+		overflowToDisk="true" 
+		maxElementsOnDisk="10000000"
+		diskPersistent="false" 
+		diskExpiryThreadIntervalSeconds="120" 
+		memoryStoreEvictionPolicy="FIFO" />
+
+	<cache name="authorizationCache"
+		   maxEntriesLocalHeap="2000"
+		   eternal="false"
+		   timeToIdleSeconds="1800"
+		   timeToLiveSeconds="1800"
+		   overflowToDisk="false"
+		   statistics="true">
+	</cache>
+
+	<cache name="authenticationCache"
+		   maxEntriesLocalHeap="2000"
+		   eternal="false"
+		   timeToIdleSeconds="1800"
+		   timeToLiveSeconds="1800"
+		   overflowToDisk="false"
+		   statistics="true">
+	</cache>
+
+	<cache name="activeSessionCache"
+		   maxEntriesLocalHeap="2000"
+		   eternal="false"
+		   timeToIdleSeconds="1800"
+		   timeToLiveSeconds="1800"
+		   overflowToDisk="false"
+		   statistics="true">
+	</cache>
+
+	<!-- 缓存半小时 -->
+	<cache name="halfHour"
+		   maxElementsInMemory="10000"
+		   maxElementsOnDisk="100000"
+		   eternal="false"
+		   timeToIdleSeconds="1800"
+		   timeToLiveSeconds="1800"
+		   overflowToDisk="false"
+		   diskPersistent="false" />
+
+	<!-- 缓存一小时 -->
+	<cache name="hour"
+		   maxElementsInMemory="10000"
+		   maxElementsOnDisk="100000"
+		   eternal="false"
+		   timeToIdleSeconds="3600"
+		   timeToLiveSeconds="3600"
+		   overflowToDisk="false"
+		   diskPersistent="false" />
+
+	<!-- 缓存一天 -->
+	<cache name="oneDay"
+		   maxElementsInMemory="10000"
+		   maxElementsOnDisk="100000"
+		   eternal="false"
+		   timeToIdleSeconds="86400"
+		   timeToLiveSeconds="86400"
+		   overflowToDisk="false"
+		   diskPersistent="false" />
+
+
+		
+</ehcache> 

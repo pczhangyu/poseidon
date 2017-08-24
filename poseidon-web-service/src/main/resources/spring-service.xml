@@ -1,0 +1,83 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+    <!-- aspectj aop启用CGliB代理 -->
+    <aop:aspectj-autoproxy expose-proxy="true" proxy-target-class="true"/>
+    <context:annotation-config/>
+
+    <!-- 扫描service -->
+    <context:component-scan base-package="com.frigga.web.service">
+        <context:exclude-filter type="annotation"
+                                expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!-- DataSource configuration for the jdbc connection pool -->
+    <import resource="datasource-config.xml" />
+
+    <!-- 数据源 会话工厂 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="classpath:mybatis-config.xml" />
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <!-- 数据源 映射 -->
+    <!--<context:component-scan base-package="com.frigga.mapper"/>-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+        <!--可用,或者;分割多个扫描的包-->
+        <property name="basePackage" value="com.frigga.mapper"/>
+    </bean>
+
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource">
+            <ref bean="dataSource"/>
+        </property>
+    </bean>
+
+    <!-- 事务规则 -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="find*" read-only="true"/>
+            <tx:method name="load*" read-only="true"/>
+            <tx:method name="search*" read-only="true"/>
+            <tx:method name="query*" read-only="true"/>
+            <tx:method name="get*" read-only="true"/>
+            <tx:method name="count*" read-only="true"/>
+            <tx:method name="list*" read-only="true"/>
+            <tx:method name="put*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="save*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="add*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="create*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="insert*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="update*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="merge*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="del*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="remove*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- 配置方式开启事务 -->
+    <aop:config proxy-target-class="true" expose-proxy="true">
+        <aop:pointcut id="serviceOperation"
+                      expression="execution(* com.frigga.web.service.*.*(..))"/>
+        <aop:advisor pointcut-ref="serviceOperation" advice-ref="txAdvice"/>
+    </aop:config>
+
+    <context:component-scan base-package="com.frigga.provider"/>
+    <!--<import resource="provider.xml"/>-->
+    <import resource="spring-ehcache.xml" />
+    <!--<import resource="spring-redis.xml" />-->
+    <!--<import resource="spring-task.xml" />-->
+
+</beans>
