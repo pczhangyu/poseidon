@@ -1,6 +1,5 @@
 <html>
 <body>
-<h2>Hello World!</h2>
-<h3>poseidon-api</h3>
+<h2>poseidon-api</h2>
 </body>
 </html>
