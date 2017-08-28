@@ -43,9 +43,13 @@
     <mappers>
         <!-- mapper xml -->
         <mapper resource="com/poseidon/mapper/xml/AccountEntityMapper.xml" />
+        <mapper resource="com/poseidon/mapper/xml/AreasEntityMapper.xml" />
+        <mapper resource="com/poseidon/mapper/xml/CitiesEntityMapper.xml" />
+        <mapper resource="com/poseidon/mapper/xml/ProvincesEntityMapper.xml" />
+        <mapper resource="com/poseidon/mapper/xml/StreetsEntityMapper.xml" />
 
         <!-- mapper ext xml -->
-        <!--<mapper resource="com/frigga/mapper/xml/ext/UserEntityMapperExt.xml" />-->
+        <mapper resource="com/poseidon/mapper/xml/ext/AreasEntityMapperExt.xml" />
 
     </mappers>
 </configuration>
