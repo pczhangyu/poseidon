@@ -18,6 +18,8 @@
 	<!-- 静态资源映射 -->
 	<!--<mvc:resources mapping="/static/**" location="/static/" cache-period="31556926"/>-->
 	<mvc:resources mapping="/upload/**" location="/upload/" cache-period="31556926"/>
+	<mvc:resources mapping="/static/**" location="/static/" cache-period="31556926"/>
+	<mvc:resources mapping="/favicon.ico" location="/static/favicon.ico" cache-period="31556926"/>
 	<!-- jsp视图解析器 -->
 	<bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/pages/" />
