@@ -23,6 +23,8 @@
         <module>poseidon-search-mapper</module>
         <module>poseidon-admin</module>
         <module>poseidon-mq</module>
+        <module>poseidon-provider</module>
+        <module>poseidon-provider-service</module>
     </modules>
 
     <properties>
