@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:jms="http://www.springframework.org/schema/jms"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:amq="http://activemq.apache.org/schema/core"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd
+	http://activemq.apache.org/schema/core  http://activemq.apache.org/schema/core/activemq-core">
+
+
+	<!-- 真正可以产生Connection的ConnectionFactory，由对应的 JMS服务厂商提供 -->
+	<!--<bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">-->
+		<!--<property name="brokerURL" value="failover:(tcp://127.0.0.1:61616)" />-->
+		<!--<property name="userName" value="admin"></property>-->
+		<!--<property name="password" value="admin"></property>-->
+	<!--</bean>-->
+	<!--tcp://192.168.128.139:61616 本地-->
+	<amq:connectionFactory id="amqConnectionFactory"
+						   brokerURL="failover:(tcp://192.168.128.139:61616)" userName="admin" password="admin"  />
+	<!-- Spring用于管理真正的ConnectionFactory的ConnectionFactory -->
+	<!--<bean id="connectionFactory"-->
+		<!--class="org.springframework.jms.connection.SingleConnectionFactory">-->
+		<!--&lt;!&ndash; 目标ConnectionFactory对应真实的可以产生JMS Connection的ConnectionFactory &ndash;&gt;-->
+		<!--<property name="targetConnectionFactory" ref="targetConnectionFactory" />-->
+	<!--</bean>-->
+	<bean id="connectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
+		<property name="targetConnectionFactory" ref="amqConnectionFactory" />
+		<property name="sessionCacheSize" value="100" />
+	</bean>
+
+
+	<!--&lt;!&ndash;这个是主题目的地，一对多的 &ndash;&gt;-->
+	<!--<bean id="topicDestination" class="org.apache.activemq.command.ActiveMQTopic">-->
+		<!--<constructor-arg value="topic" />-->
+	<!--</bean>-->
+	<!-- Spring JmsTemplate 的消息生产者 start-->
+
+	<!-- 定义JmsTemplate的Queue类型 -->
+	<bean id="jmsQueueTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<!-- 这个connectionFactory对应的是我们定义的Spring提供的那个ConnectionFactory对象 -->
+		<constructor-arg ref="connectionFactory" />
+		<!-- 非pub/sub模型（发布/订阅），即队列模式 -->
+		<property name="pubSubDomain" value="false" />
+	</bean>
+
+	<!-- 定义JmsTemplate的Topic类型 -->
+	<bean id="jmsTopicTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<!-- 这个connectionFactory对应的是我们定义的Spring提供的那个ConnectionFactory对象 -->
+		<constructor-arg ref="connectionFactory" />
+		<!-- pub/sub模型（发布/订阅） -->
+		<property name="pubSubDomain" value="true" />
+		<!--<property name="sessionAcknowledgeMode" value="1" />-->
+		<!--<property name="explicitQosEnabled" value="true"/>-->
+		<!--&lt;!&ndash; 发送模式-->
+             <!--DeliveryMode.NON_PERSISTENT=1:非持久 ;-->
+             <!--DeliveryMode.PERSISTENT=2:持久-->
+        <!--&ndash;&gt;-->
+		<!--<property name="deliveryMode" value="1"/>-->
+	</bean>
+
+	<bean id="jmsQueueListenerContainerFactory" class="org.springframework.jms.config.DefaultJmsListenerContainerFactory">
+		<property name="connectionFactory" ref="connectionFactory"/>
+	</bean>
+
+	<bean id="jmsPubSubListenerContainerFactory" class="org.springframework.jms.config.DefaultJmsListenerContainerFactory">
+		<property name="connectionFactory" ref="connectionFactory"/>
+		<property name="pubSubDomain" value="true" />
+		<property name="concurrency" value="1-2" />
+	</bean>
+
+	<bean id="queueSender" class="com.poseidon.mq.service.queue.QueueSenderService"></bean>
+
+	<bean id="topicSender" class="com.poseidon.mq.service.topic.TopicSenderService"></bean>
+
+	<context:component-scan base-package="com.poseidon.mq.service">
+		<context:exclude-filter type="annotation"
+								expression="org.springframework.stereotype.Service"/>
+	</context:component-scan>
+	<jms:annotation-driven />
+</beans>
