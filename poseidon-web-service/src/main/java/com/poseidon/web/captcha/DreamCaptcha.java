@@ -1,4 +1,4 @@
-package com.poseidon.web.service.captcha;
+package com.poseidon.web.captcha;
 
 import com.poseidon.common.base.GenerateIDUtil;
 import com.poseidon.common.http.WebUtils;

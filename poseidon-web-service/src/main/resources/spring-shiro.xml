@@ -7,7 +7,7 @@
 
     <description>Shiro安全配置</description>
 
-    <bean class="com.poseidon.web.service.captcha.DreamCaptcha">
+    <bean class="com.poseidon.web.captcha.DreamCaptcha">
         <property name="cacheManager" ref="shiroSpringCacheManager"/>
         <!-- 复用半小时缓存 -->
         <property name="cacheName" value="halfHour"/>
