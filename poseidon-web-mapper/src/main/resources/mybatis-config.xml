@@ -43,7 +43,7 @@
     <mappers>
         <!-- mapper xml -->
         <mapper resource="com/poseidon/mapper/xml/AccountEntityMapper.xml" />
-
+        <mapper resource="com/poseidon/mapper/xml/UserEntityMapper.xml"/>
         <!-- mapper ext xml -->
         <!--<mapper resource="com/frigga/mapper/xml/ext/UserEntityMapperExt.xml" />-->
 

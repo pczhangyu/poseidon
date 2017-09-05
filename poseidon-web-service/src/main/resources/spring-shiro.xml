@@ -25,7 +25,7 @@
     </bean>
 
     <!-- 項目自定义的Realm -->
-    <bean id="shiroDbRealm" class="com.frigga.web.security.shiro.ShiroDbRealm">
+    <bean id="shiroDbRealm" class="com.poseidon.web.service.shiro.ShiroDbRealm">
         <constructor-arg index="0" name="cacheManager" ref="shiroSpringCacheManager"/>
         <constructor-arg index="1" name="matcher" ref="credentialsMatcher"/>
         <!-- 启用身份验证缓存，即缓存AuthenticationInfo信息，默认false -->
@@ -79,7 +79,7 @@
     </bean>
 
     <!-- 用户授权信息Cache, 采用spring-cache, 具体请查看spring-ehcache.xml、spring-redis.xml -->
-    <bean id="shiroSpringCacheManager" class="com.frigga.web.security.shiro.cache.ShiroSpringCacheManager">
+    <bean id="shiroSpringCacheManager" class="com.poseidon.web.cache.ShiroSpringCacheManager">
         <property name="cacheManager" ref="cacheManager"/>
     </bean>
 
@@ -104,14 +104,14 @@
     </bean>
 
     <!-- shiro密码加密配置 -->
-    <bean id="passwordHash" class="com.frigga.web.security.shiro.PasswordHash">
+    <bean id="passwordHash" class="com.poseidon.web.service.shiro.PasswordHash">
         <!-- 密码加密 1次md5,增强密码可修改此处 -->
         <property name="algorithmName" value="md5"/>
         <property name="hashIterations" value="1"/>
     </bean>
 
     <!-- 密码错误5次锁定半小时 -->
-    <bean id="credentialsMatcher" class="com.frigga.web.security.shiro.RetryLimitCredentialsMatcher">
+    <bean id="credentialsMatcher" class="com.poseidon.web.service.shiro.RetryLimitCredentialsMatcher">
         <constructor-arg ref="shiroSpringCacheManager"/>
         <property name="retryLimitCacheName" value="halfHour"/>
         <property name="passwordHash" ref="passwordHash"/>

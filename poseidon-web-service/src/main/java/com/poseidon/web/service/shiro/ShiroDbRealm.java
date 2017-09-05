@@ -1,8 +1,8 @@
 package com.poseidon.web.service.shiro;
 
 import com.alibaba.fastjson.JSON;
-import com.frigga.model.UserEntity;
-import com.poseidon.web.service.UserService;
+import com.poseidon.model.UserEntity;
+import com.poseidon.web.service.user.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
