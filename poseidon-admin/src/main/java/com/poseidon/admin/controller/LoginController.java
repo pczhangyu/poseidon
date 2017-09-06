@@ -1,5 +1,6 @@
 package com.poseidon.admin.controller;
 
+import com.poseidon.web.service.resource.ResourceService;
 import com.poseidon.web.service.shiro.ShiroUser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,15 +21,14 @@ import java.util.Map;
 
 
 /**
- * Created by sunwenming on 2017/4/20.
  */
 @Controller
 public class LoginController {
     private static Logger logger = LogManager.getLogger(LoginController.class);
     private static final String CHARSET = ";UTF-8";
 
-//    @Autowired
-//    private ResourceService resourceService;
+    @Autowired
+    private ResourceService resourceService;
 
     @RequestMapping(value="/", method = RequestMethod.GET)
     public ModelAndView toLogin(){
@@ -91,11 +91,11 @@ public class LoginController {
     public ModelAndView home(){
         logger.info("开始加载home页");
         ShiroUser shiroUser =  (ShiroUser) SecurityUtils.getSubject().getPrincipal();
-//        List<Map> childrenMenus =  resourceService.getChildrenMenusByUserId(shiroUser.getId());
-//        List<Map> parentMenus =  resourceService.getParentMenusByUserId(shiroUser.getId());
+        List<Map> childrenMenus =  resourceService.getChildrenMenusByUserId(shiroUser.getId());
+        List<Map> parentMenus =  resourceService.getParentMenusByUserId(shiroUser.getId());
         ModelAndView modelAndView = new ModelAndView("home");
-//        modelAndView.addObject("childrenMenus", childrenMenus);
-//        modelAndView.addObject("parentMenus", parentMenus);
+        modelAndView.addObject("childrenMenus", childrenMenus);
+        modelAndView.addObject("parentMenus", parentMenus);
         return modelAndView;
     }
 

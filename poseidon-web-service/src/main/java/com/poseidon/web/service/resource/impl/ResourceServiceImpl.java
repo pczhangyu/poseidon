@@ -1,6 +1,8 @@
 package com.poseidon.web.service.resource.impl;
 
+import com.poseidon.web.mapper.ext.ResourceEntityMapperExt;
 import com.poseidon.web.service.resource.ResourceService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,6 +13,10 @@ import java.util.Map;
  */
 @Service("resourceService")
 public class ResourceServiceImpl implements ResourceService{
+
+    @Autowired
+    private ResourceEntityMapperExt resourceEntityMapperExt;
+
     @Override
     public List<Map> queryResourceList() {
         return null;
@@ -28,11 +34,11 @@ public class ResourceServiceImpl implements ResourceService{
 
     @Override
     public List<Map> getParentMenusByUserId(String userId) {
-        return null;
+        return resourceEntityMapperExt.getParentMenusByUserId(userId);
     }
 
     @Override
     public List<Map> getChildrenMenusByUserId(String userId) {
-        return null;
+        return resourceEntityMapperExt.getChildrenMenusByUserId(userId);
     }
 }
