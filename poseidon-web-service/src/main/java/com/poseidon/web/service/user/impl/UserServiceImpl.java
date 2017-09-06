@@ -1,7 +1,10 @@
 package com.poseidon.web.service.user.impl;
 
+import com.poseidon.mapper.UserEntityMapper;
 import com.poseidon.model.UserEntity;
+import com.poseidon.web.mapper.ext.UserEntityMapperExt;
 import com.poseidon.web.service.user.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,13 +17,19 @@ import java.util.Map;
 public class UserServiceImpl implements UserService{
 
 
+    @Autowired
+    private UserEntityMapper userEntityMapper;
+
+    @Autowired
+    private UserEntityMapperExt userEntityMapperExt;
+
     @Override
     public UserEntity selectByLoginName(String loginName) {
-        return null;
+        return userEntityMapperExt.selectByLoginName(loginName);
     }
 
     @Override
     public List<Map<String, Object>> getUserWithRoleAndResource(String loginName) {
-        return null;
+        return userEntityMapperExt.getUserWithRoleAndResource(loginName);
     }
 }

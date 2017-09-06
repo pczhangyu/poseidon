@@ -34,7 +34,7 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
         <!--可用,或者;分割多个扫描的包-->
-        <property name="basePackage" value="com.poseidon.mapper"/>
+        <property name="basePackage" value="com.poseidon.mapper;com.poseidon.web.mapper.ext"/>
     </bean>
 
     <bean id="transactionManager"
