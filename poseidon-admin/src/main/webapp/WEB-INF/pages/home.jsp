@@ -36,16 +36,15 @@ desired effect
 	<%@include file="/common/leftsider.jsp"%>
 	<!-- Content Wrapper. Contains page content -->
 	<div id="content_frigga" class="content-wrapper">
-
 		<!-- Content Header (Page header) -->
-		<%--<section class="content-header">--%>
-			<%--<h1> 权限管理 <small>组织架构管理</small> </h1>--%>
-			<%--<ol class="breadcrumb">--%>
-				<%--<li><a href="#"><i class="fa fa-dashboard"></i>系统设置</a></li>--%>
-				<%--<li>权限管理</li>--%>
-				<%--<li class="active">组织架构管理</li>--%>
-			<%--</ol>--%>
-		<%--</section>--%>
+		<section class="content-header">
+			<h1> 权限管理 <small>组织架构管理</small> </h1>
+			<ol class="breadcrumb">
+				<li><a href="#"><i class="fa fa-dashboard"></i>系统设置</a></li>
+				<li>权限管理</li>
+				<li class="active">组织架构管理</li>
+			</ol>
+		</section>
 	</div>
 	<!-- /.content-wrapper -->
 
@@ -111,6 +110,5 @@ desired effect
    immediately after the control sidebar -->
 	<div class="control-sidebar-bg"></div>
 </div>
-
 </body>
 </html>
