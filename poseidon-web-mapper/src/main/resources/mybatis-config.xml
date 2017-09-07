@@ -45,8 +45,11 @@
         <mapper resource="com/poseidon/mapper/xml/AccountEntityMapper.xml" />
         <mapper resource="com/poseidon/mapper/xml/UserEntityMapper.xml"/>
         <mapper resource="com/poseidon/mapper/xml/ResourceEntityMapper.xml"/>
+        <mapper resource="com/poseidon/mapper/xml/RoleEntityMapper.xml"/>
         <!-- mapper ext xml -->
         <mapper resource="com/poseidon/web/mapper/xml/ext/UserEntityMapperExt.xml" />
         <mapper resource="com/poseidon/web/mapper/xml/ext/ResourceEntityMapperExt.xml" />
+        <mapper resource="com/poseidon/web/mapper/xml/ext/RoleEntityMapperExt.xml" />
+
     </mappers>
 </configuration>
