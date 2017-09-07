@@ -1,1 +1,29 @@
 --产品商品管理
+
+# 商品相关表
+SHOW CREATE TABLE
+sdb_b2c_brand  商品品牌
+sdb_b2c_type_brand 类型和品牌关联表
+sdb_b2c_goods 商品主表
+sdb_b2c_goods_type 商品类型
+sdb_b2c_goods_type_props 商品属性表
+sdb_b2c_goods_type_props_value 商品类型扩展属性值表
+sdb_b2c_goods_store_prompt
+sdb_b2c_goods_type_spec 商品类型规格表
+sdb_b2c_specification 商品规格表
+sdb_b2c_spec_values  商品规格值表
+sdb_b2c_goods_cat 商品类别属性有限表
+sdb_b2c_goods_keywords 商品搜索关键字
+sdb_b2c_goods_spec_index 商品规格索引表
+sdb_b2c_goods_rate 相关商品表
+sdb_b2c_archive_order_objects 订单商品表
+sdb_b2c_goods_virtual_cat 商品虚拟分类
+sdb_b2c_goods_lv_price 商品会员等级价格
+sdb_b2c_goods_promotion_ref 商品与商品促销规则
+sdb_b2c_comment_goods_point 商品评分表
+sdb_b2c_comment_goods_type 商品评论类型表
+;
+
+SELECT * FROM sdb_b2c_type_brand;
+
+SHOW CREATE TABLE sdb_b2c_goods_type_props_value;
