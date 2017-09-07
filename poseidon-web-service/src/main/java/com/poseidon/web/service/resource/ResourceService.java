@@ -1,5 +1,7 @@
 package com.poseidon.web.service.resource;
 
+import com.poseidon.model.ResourceEntity;
+
 import java.util.List;
 import java.util.Map;
 
@@ -18,5 +20,17 @@ public interface ResourceService {
 
     List<Map> getChildrenMenusByUserId(String userId);
 
-//    ResourceEntity selectByResourceId
+    void disable(String resourceId);
+
+    void enable(String resourceId);
+
+    void saveOrUpdate (ResourceEntity model);
+
+    void save(ResourceEntity model);
+
+    void update(ResourceEntity model);
+
+    ResourceEntity selectByResourceId(String resourceId);
+
+    void deleteByResourceId(String resourceId);
 }
