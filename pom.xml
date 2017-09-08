@@ -65,6 +65,7 @@
         <jpush.version>3.2.17</jpush.version>
         <http-request.version>6.0</http-request.version>
         <activemq.version>5.14.5</activemq.version>
+        <quartz.version>2.3.0</quartz.version>
     </properties>
 
     <dependencies>
@@ -156,6 +157,12 @@
             <artifactId>javax.servlet-api</artifactId>
             <version>${servlet-api.version}</version>
             <scope>provided</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>${quartz.version}</version>
         </dependency>
 
         <!-- 测试 -->
