@@ -125,3 +125,4 @@ curl -XPOST  http://192.168.128.139:9200/goodsinfo/goods/_mapping -d'
 }'
 
 
+
